@@ -100,7 +100,7 @@ namespace Mixed_BP_AHP
 
         private void BP_AHP_Decision()
         {
-            Dictionary<string,double> dict = SetJudgmentMatrixFromDataSet(ahp.GetBPAdjustMatrix());
+            Dictionary<string,double> dict = SetJudgmentMatrixFromDataSet(ahp.GetAdjustedMatrix());
 
             this.AddNewSeriesToChart(chart1,"BP-AHP决策",dict);
             View_tabControl.SelectedTab = ResultView_Page;
@@ -111,7 +111,7 @@ namespace Mixed_BP_AHP
             BPAHP_tabControl.TabPages.Clear();
 
             ahp.AdjustConsistency();
-            DataSet bpMatrix = ahp.GetBPAdjustMatrix();
+            DataSet bpMatrix = ahp.GetAdjustedMatrix();
             int i = 0;
 
             foreach (TabPage page in AHP_tabControl.TabPages)

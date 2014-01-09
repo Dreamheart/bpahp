@@ -16,7 +16,7 @@ namespace AHP
         private int matrixDimension;
         private double[][] priorityVector;
 
-        private double[][] rowSums;
+        private double[][] columnSums;
 
         public LayerDescription(int layerNodeCount, int matrixDimension)
         {
@@ -30,7 +30,7 @@ namespace AHP
                 this.layerNodeMatrix[i] = new Fraction[matrixDimension, matrixDimension];
             }
             this.priorityVector = new double[layerNodeCount][];
-            this.rowSums = new double[layerNodeCount][];
+            this.columnSums = new double[layerNodeCount][];
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace AHP
                 double ci = 0;
                 for (int i = 0; i < this.matrixDimension; i++)
                 {
-                    ci += this.rowSums[nodeIndex][i] * this.priorityVector[nodeIndex][i];
+                    ci += this.columnSums[nodeIndex][i] * this.priorityVector[nodeIndex][i];
                 }
 
                 ci = (ci - this.matrixDimension) / (this.matrixDimension - 1);
@@ -129,8 +129,15 @@ namespace AHP
         /// 通过BP神经网络调整本层指定准则的判断矩阵一致性
         /// </summary>
         /// <param name="nodeIndex"></param>
-        public void AdjustConsistency_BP(int nodeIndex)
+        private void AdjustConsistency_BP(int nodeIndex)
         {
+            //若判断矩阵的维度小于等于2维，则符合一致性无需调整
+            int dimentionOfNodeMatrix = this.layerNodeMatrix[nodeIndex].GetLength(0);
+            if (dimentionOfNodeMatrix <= 2)
+            {
+                return;
+            }
+
             #region 构造bp训练的输入/输出数据
             SortedDictionary<string,double> dictInput = new SortedDictionary<string,double>();
             SortedDictionary<string, double> dictOutput = new SortedDictionary<string, double>();
@@ -257,7 +264,7 @@ namespace AHP
 
             //////////////////////////////////////////////////////////
             //Step 1
-            double[] rowSum = new double[indexCount];
+            double[] columnSum = new double[indexCount];
             for (int i = 0; i < indexCount; i++)
             {
                 double sum = 0;
@@ -265,10 +272,10 @@ namespace AHP
                 {
                     sum += judgmentMatrix[j, i].DoubleValue;
                 }
-                rowSum[i] = sum;
+                columnSum[i] = sum;
             }
 
-            this.rowSums[nodeIndex] = rowSum;
+            this.columnSums[nodeIndex] = columnSum;
 
             //Step 2
             //TODO:此处修改了原始矩阵，需要对原始矩阵进行拷贝保护
@@ -276,7 +283,7 @@ namespace AHP
             {
                 for (int j = 0; j < indexCount; j++)
                 {
-                    judgmentMatrix[i, j].DoubleValue /= rowSum[j];
+                    judgmentMatrix[i, j].DoubleValue /= columnSum[j];
                 }
             }
             //Step 3 
@@ -322,7 +329,7 @@ namespace AHP
         /// </summary>
         /// <param name="nodeIndex"></param>
         /// <returns></returns>
-        internal Fraction[,] GetBPAdjustedMatrix(int nodeIndex)
+        internal Fraction[,] GetAdjustedMatrix(int nodeIndex)
         {
             return this.layerNodeMatrixBPAdjustConsistency[nodeIndex];
         }

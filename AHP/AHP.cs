@@ -24,6 +24,25 @@ namespace AHP
             }
         }
 
+        public void SetJudgmentMatrix(DataSet dsMatrix)
+        {
+            if (null == dsMatrix)
+            {
+                throw new NullJudgmentMatrixException("无法将空的判断矩阵交给AHP决策");
+            }
+            this.originAHPDataSet = dsMatrix;
+            int i = 0;
+            int seqNo = 0;
+            while (i < layerStructure.Length - 1)
+            {
+                for (int j = 0; j < layerStructure[i]; j++)
+                {
+                    this.SetJudgmentMatrix(i, j, DataTableToMatrix(dsMatrix.Tables[seqNo++]));
+                }
+                i++;
+            }
+        }
+
         /// <summary>
         /// 调整判断矩阵的一致性
         /// </summary>
@@ -33,6 +52,23 @@ namespace AHP
             {
                 layer.AdjustConsistency_BP();
             }
+        }
+
+        public DataSet GetAdjustedMatrix()
+        {
+            this.adjustedAHPDataSet = this.originAHPDataSet.Copy();
+            int i = 0;
+            int seq = 0;
+            while (i < layerStructure.Length - 1)
+            {
+                for (int j = 0; j < layerStructure[i]; j++)
+                {
+                    MatrixToDataTable(seq++, this.GetAdjustedMatrix(i, j));
+                }
+                i++;
+            }
+
+            return this.adjustedAHPDataSet;
         }
 
         public double[] Assessment()
@@ -74,84 +110,14 @@ namespace AHP
 
         }
 
-        public void SetJudgmentMatrix(int layerIndex, int nodeIndex, Fraction[,] matrix)
+        private void SetJudgmentMatrix(int layerIndex, int nodeIndex, Fraction[,] matrix)
         {
             layers[layerIndex].SetNodeMatrix(nodeIndex, matrix);
         }
 
-        public void TestMethod()
+        private Fraction[,] GetAdjustedMatrix(int i, int j)
         {
-            Fraction[,] testDataL1 = { { new Fraction(1) , new Fraction(3) , new Fraction(7)},
-                                     { new Fraction(1,3) , new Fraction(1) , new Fraction(5)},
-                                     { new Fraction(1,7) , new Fraction(1,5) , new Fraction(1)}
-                                   };
-            Fraction[,] testDataL2_1 = { { new Fraction(1) , new Fraction(1,4)   },
-                                         { new Fraction(4) , new Fraction(1) }
-                                       };
-            Fraction[,] testDataL2_2 = { { new Fraction(1) , new Fraction(7)   },
-                                         { new Fraction(1,7) , new Fraction(1) }
-                                       };
-            Fraction[,] testDataL2_3 = { { new Fraction(1) , new Fraction(1,8)   },
-                                         { new Fraction(8) , new Fraction(1) }
-                                       };
-
-            layers[0].SetNodeMatrix(0, testDataL1);
-            layers[1].SetNodeMatrix(0, testDataL2_1);
-            layers[1].SetNodeMatrix(1, testDataL2_2);
-            layers[1].SetNodeMatrix(2, testDataL2_3);
-
-            double[] result = Assessment();
-
-            //double[] pv = layers[0].GetPriorityVectorOfMatrix(0);
-            //for (int i = 0; i < pv.Length; i++)
-            //{
-            //    Console.Write("{0}  ", pv[i]);
-            //}
-            //Console.WriteLine();
-
-            //pv = layers[1].GetPriorityVectorOfMatrix(0);
-            //for (int i = 0; i < pv.Length; i++)
-            //{
-            //    Console.Write("{0}  ", pv[i]);
-            //}
-            //Console.WriteLine();
-
-            //pv = layers[1].GetPriorityVectorOfMatrix(1);
-            //for (int i = 0; i < pv.Length; i++)
-            //{
-            //    Console.Write("{0}  ", pv[i]);
-            //}
-            //Console.WriteLine();
-
-            //pv = layers[1].GetPriorityVectorOfMatrix(2);
-            //for (int i = 0; i < pv.Length; i++)
-            //{
-            //    Console.Write("{0}  ", pv[i]);
-            //}
-            //Console.WriteLine();
-        }
-
-        public DataSet GetBPAdjustMatrix()
-        {
-            this.adjustedAHPDataSet = this.originAHPDataSet.Copy();
-            int i = 0;
-            int seq = 0;
-            while (i < layerStructure.Length - 1)
-            {
-                for (int j = 0; j < layerStructure[i]; j++)
-                {
-                    MatrixToDataTable(seq++, this.GetBPAdjustMatrix(i, j));
-                    //result.Tables.Add();
-                }
-                i++;
-            }
-
-            return this.adjustedAHPDataSet;
-        }
-
-        private Fraction[,] GetBPAdjustMatrix(int i, int j)
-        {
-            return this.layers[i].GetBPAdjustedMatrix(j);
+            return this.layers[i].GetAdjustedMatrix(j);
         }
 
         private DataTable MatrixToDataTable(int nodeIndex,Fraction[,] matrix)
@@ -166,24 +132,6 @@ namespace AHP
             return this.adjustedAHPDataSet.Tables[nodeIndex];
         }
 
-        public void SetJudgmentMatrix(DataSet dsMatrix)
-        {
-            if (null == dsMatrix)
-            {
-                throw new NullJudgmentMatrixException("无法将空的判断矩阵交给AHP决策");
-            }
-            this.originAHPDataSet = dsMatrix;
-            int i = 0;
-            int seqNo = 0;
-            while (i < layerStructure.Length - 1)
-            {
-                for (int j = 0; j < layerStructure[i]; j++)
-                {
-                    this.SetJudgmentMatrix(i, j, DataTableToMatrix(dsMatrix.Tables[seqNo++]));
-                }
-                i++;
-            }
-        }
         private Fraction[,] DataTableToMatrix(DataTable dataTable)
         {
             int dimision = dataTable.Rows.Count;
