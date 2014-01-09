@@ -97,6 +97,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="SetupWindow.resx">
+      <DependentUpon>SetupWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TestWindow.resx">
       <DependentUpon>TestWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -115,6 +118,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SetupWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetupWindow.Designer.cs">
+      <DependentUpon>SetupWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="TestWindow.cs">
       <SubType>Form</SubType>
@@ -138,6 +147,10 @@
     <ProjectReference Include="..\BPNet\BPNet.csproj">
       <Project>{82428F82-C9F0-49F9-AEB3-A070CB1BB5B7}</Project>
       <Name>BPNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XMLConfiguration\XMLConfiguration.csproj">
+      <Project>{8F2FA62B-E163-48F7-B998-827EA987E32D}</Project>
+      <Name>XMLConfiguration</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

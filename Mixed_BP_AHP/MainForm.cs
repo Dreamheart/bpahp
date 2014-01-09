@@ -12,6 +12,7 @@ using AHP;
 using Microsoft.Office.Core;
 using System.Reflection;
 using System.Windows.Forms.DataVisualization.Charting;
+using XMLConfiguration;
 
 namespace Mixed_BP_AHP
 {
@@ -195,7 +196,8 @@ namespace Mixed_BP_AHP
 
         private Dictionary<string,double> SetJudgmentMatrixFromDataSet(DataSet dsMatrix)
         {
-            int[] a = { 1, 3, 2 };
+            string[] stringParam = XMLConfigurationTool.GetConfigItem("Debug_Structure", "1,3,2").Split(',');
+            int[] intParam = Array.ConvertAll<string, int>(stringParam, delegate(string s) { return int.Parse(s); });
             #region Temp
 
             this.names = new string[2];
@@ -204,7 +206,7 @@ namespace Mixed_BP_AHP
             #endregion
 
 
-            this.ahp = new BasicAHP(a);
+            this.ahp = new BasicAHP(intParam);
 
             this.ahp.SetJudgmentMatrix(dsMatrix);
 
@@ -367,6 +369,11 @@ namespace Mixed_BP_AHP
         private void Exit_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Option_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new SetupWindow().ShowDialog();
         }
 
     }       

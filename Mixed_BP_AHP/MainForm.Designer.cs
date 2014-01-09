@@ -55,6 +55,7 @@
             this.DataView_Page = new System.Windows.Forms.TabPage();
             this.ResultView_Page = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.Option_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ahP_Design_Guide1 = new Mixed_BP_AHP.AHP_Design_Guide();
             this.BPAHP_tabControl.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -134,7 +135,8 @@
             // 
             this.Decision_ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AHP_test,
-            this.BP_AHP_Test});
+            this.BP_AHP_Test,
+            this.Option_ToolStripMenuItem});
             this.Decision_ToolStripMenuItem.Name = "Decision_ToolStripMenuItem";
             this.Decision_ToolStripMenuItem.Size = new System.Drawing.Size(102, 24);
             this.Decision_ToolStripMenuItem.Text = "决策分析(&D)";
@@ -328,6 +330,13 @@
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
+            // Option_ToolStripMenuItem
+            // 
+            this.Option_ToolStripMenuItem.Name = "Option_ToolStripMenuItem";
+            this.Option_ToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
+            this.Option_ToolStripMenuItem.Text = "设置(&O)";
+            this.Option_ToolStripMenuItem.Click += new System.EventHandler(this.Option_ToolStripMenuItem_Click);
+            // 
             // ahP_Design_Guide1
             // 
             this.ahP_Design_Guide1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -397,6 +406,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.TabPage Design_Page;
         private AHP_Design_Guide ahP_Design_Guide1;
+        private System.Windows.Forms.ToolStripMenuItem Option_ToolStripMenuItem;
     }
 }
 
