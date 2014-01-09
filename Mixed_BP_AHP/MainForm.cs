@@ -18,193 +18,33 @@ namespace Mixed_BP_AHP
 {
     public partial class MainForm : Form
     {
-        private int DataColumnBeginIndex = 1;
         private BasicAHP ahp = null;
         private DataSet matrixAHP = null;
-
-        private string[] names = null;
-        private Dictionary<string, double>[] seriesCollection = null;
+        private DataSet matrixBPAHP = null;
 
         public MainForm()
         {
             InitializeComponent();
         }
 
-
-        ///// <summary>
-        ///// 通过对话框选择BP网络训练数据文件
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void menuImportTrainData_Click(object sender, EventArgs e)
-        //{
-        //    OpenFileDialog openFile = new OpenFileDialog();
-
-        //    //获得训练数据输入数据文件名
-        //    openFile.Title = "Training input...";
-        //    openFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-        //    DialogResult result1 = openFile.ShowDialog();
-        //    string file_input = openFile.FileName;
-
-        //    //获得训练数据期望输出文件名
-        //    openFile.Title = "Training output...";
-        //    openFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-        //    DialogResult result2 = openFile.ShowDialog();
-        //    string file_output = openFile.FileName;
-
-        //    if (DialogResult.OK == result1 && DialogResult.OK == result2)
-        //    {
-        //        bpn = new BasicBPNet();
-        //        bool isSuccess = bpn.ImportTrainData(file_input, file_output);
-        //        if (isSuccess)
-        //        {
-        //            DataTable tmp = bpn.TrainDataTable;
-
-        //            dataGrid_Data.DataSource = null;
-        //            dataGrid_Data.Rows.Clear();
-        //            dataGrid_Data.Columns.Clear();
-                    
-        //            dataGrid_Data.DataSource = tmp;
-                    
-        //            object[] row = new object[2];
-        //            for (int i = 0; i < tmp.Columns.Count; i++)
-        //            {
-        //                row[0] = tmp.Columns[i].Caption;
-        //                row[1] = tmp.Columns[i].DataType.ToString();
-        //                dataGrid_Var.Rows.Add(row);
-        //            }
-                    
-                    
-
-        //            MessageBox.Show("Train data loaded!", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Something wrong in your file...", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-        //}
-
-        //private void menuTrainBPNet_Click(object sender, EventArgs e)
-        //{
-        //    bpn.init();
-        //    int study = 0;
-        //    do
-        //    {
-        //        study++;
-        //        bpn.train();
-        //        //bp.rate = 0.95 - (0.95 - 0.3) * study / 50000;
-        //        //Console.Write("第 " + study + "次学习： ");
-        //        //Console.WriteLine(" 均方差为 " + bp.e);  
-
-        //    } while (bpn.e > 0.001 && study < 50000);
-
-        //    text_output.Text += "第 " + study + "次学习： ";
-        //    text_output.Text += " 均方差为 " + bpn.e + "  " + System.Environment.NewLine;
-
-        //    bpn.saveMatrix(bpn.w, "w.txt");
-        //    bpn.saveMatrix(bpn.v, "v.txt");
-        //    bpn.saveMatrix(bpn.b1, "b1.txt");
-        //    bpn.saveMatrix(bpn.b2, "b2.txt");
-        //    bpn.saveParas("para.txt");
-        //}
-
-        //private void menuImportPredictData_Click(object sender, EventArgs e)
-        //{
-        //    OpenFileDialog openFile = new OpenFileDialog();
-
-        //    //获得预测数据文件名
-        //    openFile.Title = "Predict input...";
-        //    openFile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-        //    DialogResult result = openFile.ShowDialog();
-        //    string file_input = openFile.FileName;
-
-        //    if (DialogResult.OK == result)
-        //    {
-        //        bpn = new BasicBPNet();
-        //        bool isSuccess = bpn.ImportPredictData(file_input);
-        //        if (isSuccess)
-        //        {
-        //            DataTable tmp = bpn.PredictDataTable;
-
-        //            dataGrid_Data.DataSource = null;
-        //            dataGrid_Data.Rows.Clear();
-        //            dataGrid_Data.Columns.Clear();
-                    
-        //            dataGrid_Var.Rows.Clear();
-
-        //            dataGrid_Data.DataSource = tmp;
-
-        //            object[] row = new object[2];
-        //            for (int i = 0; i < tmp.Columns.Count; i++)
-        //            {
-        //                row[0] = tmp.Columns[i].Caption;
-        //                row[1] = tmp.Columns[i].DataType.ToString();
-        //                dataGrid_Var.Rows.Add(row);
-        //            }
-
-        //            MessageBox.Show("Predict data loaded!", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Something wrong in your file...", "Tip", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-
-        //}
-
-        //private void menuPredict_Click(object sender, EventArgs e)
-        //{
-        //    text_output.Text += bpn.PredictData();
-        //}
-
-        //private void menuSaveBPNet_Click(object sender, EventArgs e)
-        //{
-        //    bpn.SaveBPNet();
-        //}
-
-        //private void menuLoadBPNet_Click(object sender, EventArgs e)
-        //{
-        //    bpn = new BasicBPNet();
-        //    bpn.LoadBPNet();
-        //}
-
         private void AHP_test_Click(object sender, EventArgs e)
         {
-            //text_output.Text += "AHP决策结果：" + System.Environment.NewLine;
             try
             {
                 Dictionary<string,double> dict = SetJudgmentMatrixFromDataSet(this.matrixAHP);
                 this.AddNewSeriesToChart(chart1, "AHP决策", dict);
                 View_tabControl.SelectedTab = ResultView_Page;
-
-                //插入数据
-
-                //this.names[0] = "AHP决策";
-                //this.seriesCollection[0] = dict;
-
-                //this.CreateBarChart(chart1, this.names, this.seriesCollection);
             }
             catch (NullJudgmentMatrixException ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-           
         }
 
         private Dictionary<string,double> SetJudgmentMatrixFromDataSet(DataSet dsMatrix)
         {
             string[] stringParam = XMLConfigurationTool.GetConfigItem("Debug_Structure", "1,3,2").Split(',');
             int[] intParam = Array.ConvertAll<string, int>(stringParam, delegate(string s) { return int.Parse(s); });
-            #region Temp
-
-            this.names = new string[2];
-            this.seriesCollection = new Dictionary<string, double>[2];
-
-            #endregion
-
 
             this.ahp = new BasicAHP(intParam);
 
@@ -216,20 +56,10 @@ namespace Mixed_BP_AHP
 
             for (int i = 0; i < result.Length; i++)
             {
-                dict.Add(string.Format("方案{0}", i), result[i]);
+                dict.Add(string.Format("方案{0}", i+1), result[i]);
             }
 
             return dict;
-
-          
-
-
-            //for (int index = 0; index < result.Length; index++)
-            //{
-            //    text_output.Text += string.Format("方案{0}决策结果:  {1}  ", index, result[index]) + System.Environment.NewLine;
-            //}
-            //text_output.Select(text_output.Text.Length, 0);
-            //text_output.ScrollToCaret();
         }
 
 
@@ -270,17 +100,10 @@ namespace Mixed_BP_AHP
 
         private void BP_AHP_Decision()
         {
-            //text_output.Text += "BP-AHP混合决策结果：" + System.Environment.NewLine;
             Dictionary<string,double> dict = SetJudgmentMatrixFromDataSet(ahp.GetBPAdjustMatrix());
-
-            //插入数据
-
-            //this.names[1] = "BP-AHP决策";
-            //this.seriesCollection[1] = dict;
 
             this.AddNewSeriesToChart(chart1,"BP-AHP决策",dict);
             View_tabControl.SelectedTab = ResultView_Page;
-            //this.CreateBarChart(chart1, this.names, this.seriesCollection);
         }
 
         private void AdjustConsistencyAndDisplay()
