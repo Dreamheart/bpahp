@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using BPNet;
 
-namespace AHP
+namespace Algorithm_AHP
 {
     class LayerDescription
     {
@@ -262,7 +262,6 @@ namespace AHP
             //拷贝原始矩阵
             Fraction[,] judgmentMatrix = this.CloneFractionMatrix(_judgmentMatrix);
 
-            //////////////////////////////////////////////////////////
             //Step 1
             double[] columnSum = new double[indexCount];
             for (int i = 0; i < indexCount; i++)
@@ -278,7 +277,6 @@ namespace AHP
             this.columnSums[nodeIndex] = columnSum;
 
             //Step 2
-            //TODO:此处修改了原始矩阵，需要对原始矩阵进行拷贝保护
             for (int i = 0; i < indexCount; i++)
             {
                 for (int j = 0; j < indexCount; j++)

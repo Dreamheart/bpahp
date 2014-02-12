@@ -8,7 +8,7 @@
     <ProjectGuid>{80EF260C-2731-4C66-95FB-6C22B98A793F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AHP</RootNamespace>
+    <RootNamespace>Algorithm_AHP</RootNamespace>
     <AssemblyName>AHP</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -40,10 +40,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AHP.cs" />
+    <Compile Include="BasicNode.cs" />
     <Compile Include="BPAHP.cs" />
+    <Compile Include="AbstractAHP.cs" />
     <Compile Include="Fraction.cs" />
     <Compile Include="LayerDescription.cs" />
-    <Compile Include="NullJudgmentMatrixException.cs" />
+    <Compile Include="AHPExceptions.cs" />
+    <Compile Include="MultiLayersAHP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

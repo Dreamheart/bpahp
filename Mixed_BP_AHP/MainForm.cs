@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using BPNet;
-using AHP;
+using Algorithm_AHP;
 using Microsoft.Office.Core;
 using System.Reflection;
 using System.Windows.Forms.DataVisualization.Charting;

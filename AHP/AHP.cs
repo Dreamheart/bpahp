@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 
-namespace AHP
+namespace Algorithm_AHP
 {
     public class BasicAHP
     {

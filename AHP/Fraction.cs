@@ -3,13 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AHP
+namespace Algorithm_AHP
 {
     public class Fraction
     {
         private int numerator;
         private int denominator;
         private double value;
+
+        public static Fraction[,] CloneFractionMatrix(Fraction[,] src)
+        {
+            //拷贝原始矩阵
+            int length1 = src.GetLength(0);
+            int length2 = src.GetLength(1);
+
+            Fraction[,] dest = new Fraction[length1, length2];
+            for (int i = 0; i < length1; i++)
+            {
+                for (int j = 0; j < length2; j++)
+                {
+                    dest[i, j] = new Fraction(src[i, j]);
+                }
+            }
+            return dest;
+        }
 
         public Fraction(int _singleInt):this(_singleInt,1)
         {
