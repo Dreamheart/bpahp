@@ -124,5 +124,14 @@ namespace Algorithm_AHP
         {
             return 0;
         }
+
+        /// <summary>
+        /// 节点名称
+        /// </summary>
+        public string NodeName{
+            get{
+                return this.nodeName;
+            }
+        }
     }
 }

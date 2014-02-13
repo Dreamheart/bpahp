@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Algorithm_AHP;
 
 namespace Mixed_BP_AHP
 {
@@ -18,8 +19,6 @@ namespace Mixed_BP_AHP
 
         private void button1_Click(object sender, EventArgs e)
         {
-            uC_Tree1.Test();
-            uC_Tree1.RefreshGraphic();
         }
     }
 }

@@ -70,7 +70,7 @@ namespace Mixed_BP_AHP
 
             //获得训练数据输入数据文件名
             openFile.Title = "Select JudgmentMatrix File ...";
-            openFile.Filter = "Text files (*.xlsx)|*.xlsx|Text files (*.xls)|*.xls|All files (*.*)|*.*";
+            openFile.Filter = "Excel files (*.xlsx)|*.xlsx|Excel files (*.xls)|*.xls|All files (*.*)|*.*";
             DialogResult result = openFile.ShowDialog();
             string file_input = openFile.FileName;
             
@@ -197,6 +197,57 @@ namespace Mixed_BP_AHP
         private void Option_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new SetupWindow().ShowDialog();
+        }
+
+
+
+
+
+        private void ForDev_Open_Click(object sender, EventArgs e)
+        {            
+            AHPSolution config = new AHPSolution("test.xml");
+            //config.SetConfigItem("DataFile", "MultiLayerData.xlsx");
+            //config.SetConfigItem("DataColumnBeginIndex", "1");
+            //config.SetConfigItem("TotalLayers", "4");
+            //config.SetConfigItem("TargetName", "理想度");
+            //config.SetConfigItem("PlanNames", "计划1;计划2;计划3;计划4");
+            //config.SetConfigItem("理想度", "准则1A;准则1B;准则1C");
+            //config.SetConfigItem("准则1A","准则2A;准则2B");
+            //config.SetConfigItem("准则1B","准则2B;准则2C;准则2D");
+            //config.SetConfigItem("准则1C","准则2A;准则2B;准则2D");
+
+            OpenFileDialog openFile = new OpenFileDialog();
+
+            //获得训练数据输入数据文件名
+            openFile.Title = "Select JudgmentMatrix File ...";
+            openFile.Filter = "Excel files (*.xlsx)|*.xlsx|Excel files (*.xls)|*.xls|All files (*.*)|*.*";
+            DialogResult result = openFile.ShowDialog();
+            string file_input = openFile.FileName;
+
+            if (DialogResult.OK == result)
+            {
+                ExcelDocument excelFile = new ExcelDocument();
+
+                this.matrixAHP = excelFile.Parse(file_input);
+
+                AHP_tabControl.TabPages.Clear();
+
+                foreach (DataTable table in this.matrixAHP.Tables)
+                {
+                    TabPage page = new TabPage(table.TableName.TrimEnd('$'));
+
+                    DataGridView dgv = new DataGridView();
+                    dgv.DataSource = table;
+
+                    page.Controls.Add(dgv);
+
+                    dgv.Dock = DockStyle.Fill;
+
+                    AHP_tabControl.TabPages.Add(page);
+                }
+            }
+
+            MultiLayersAHP mahp = new MultiLayersAHP(config, this.matrixAHP);
         }
 
     }       

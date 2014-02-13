@@ -25,4 +25,14 @@ namespace Algorithm_AHP
         {
         }
     }
+
+    public class NullConfigurationItemException : Exception
+    {
+        const string exceptionMessage = "配置项不存在";
+
+        public NullConfigurationItemException(string message) :
+            base(string.Format("{0}-{1}", exceptionMessage, message))
+        {
+        }
+    }
 }

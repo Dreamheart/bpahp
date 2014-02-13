@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AHP.cs" />
+    <Compile Include="AHPSolution.cs" />
     <Compile Include="BasicNode.cs" />
     <Compile Include="BPAHP.cs" />
     <Compile Include="AbstractAHP.cs" />
