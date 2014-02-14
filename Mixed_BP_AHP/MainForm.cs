@@ -248,6 +248,7 @@ namespace Mixed_BP_AHP
             }
 
             MultiLayersAHP mahp = new MultiLayersAHP(config, this.matrixAHP);
+            mahp.CalculatePriorities();
         }
 
     }       

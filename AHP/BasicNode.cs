@@ -55,6 +55,20 @@ namespace Algorithm_AHP
         }
 
         /// <summary>
+        /// 获取直接下层节点的引用
+        /// </summary>
+        /// <returns></returns>
+        public BasicNode[] GetDownLinkedNodes()
+        {
+            if ( null == this.downLinkedNodes)
+            {
+                return new BasicNode[0];
+            }
+
+            return this.downLinkedNodes;
+        }
+
+        /// <summary>
         /// 添加受本节点贡献的上层节点的引用
         /// </summary>
         /// <param name="_upLinkedNode"></param>
@@ -68,6 +82,12 @@ namespace Algorithm_AHP
         /// </summary>
         public void CalculatePriorities() 
         {
+            if ( null == this.matrix )
+            {
+                Console.WriteLine(string.Format("系统信息：节点“{0}”不存在下层直接关联节点，无判断矩阵，故跳过计算贡献度", this.nodeName));
+                return;
+            }
+
             int indexCount = this.matrix.GetLength(0);
 
             //拷贝原始矩阵
@@ -108,8 +128,9 @@ namespace Algorithm_AHP
             }
             
             //存储贡献度
+            string[] keys = this.priorities.Keys.ToArray<string>();
             int pvindex = 0;
-            foreach (string key in this.priorities.Keys)
+            foreach (string key in keys)
             {
                 this.priorities[key] = pv[pvindex++];
             }

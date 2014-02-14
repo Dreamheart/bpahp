@@ -86,13 +86,34 @@ namespace Algorithm_AHP
 
                 //Step3：设置下层关联节点
                 iterNode.SetDownLinkedNodes(downNodes, downMatrix);
-                
                             
             }
 
             //记录目标节点引用
             this.targetNode = NoRepeatAdd(config.GetConfigItem("TargetName", "目标"));
-            
+        }
+
+        /// <summary>
+        /// 计算每个节点收到来自直接下层关联节点的贡献，并以字典的形式存放在该节点内
+        /// </summary>
+        public void CalculatePriorities()
+        {
+            //广度优先遍历辅助队列
+            Queue<BasicNode> travelQueue = new Queue<BasicNode>();
+
+            //目标节点如队列作为遍历的起点
+            travelQueue.Enqueue(this.targetNode);
+            BasicNode iterNode = null;
+            while (travelQueue.Count>0)
+            {
+                iterNode = travelQueue.Dequeue();
+                iterNode.CalculatePriorities();
+                foreach (BasicNode subNode in iterNode.GetDownLinkedNodes())
+                {
+                    if (!travelQueue.Contains(subNode)) travelQueue.Enqueue(subNode);
+                }
+            }
+
         }
 
         /// <summary>
@@ -109,6 +130,11 @@ namespace Algorithm_AHP
             return this.Nodes[item];
         }
 
+        /// <summary>
+        /// 将Datatable转化为Fraction判断矩阵
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <returns></returns>
         private Fraction[,] DataTableToMatrix(DataTable dataTable)
         {
             int dimision = dataTable.Rows.Count;
