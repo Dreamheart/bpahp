@@ -117,6 +117,29 @@ namespace Algorithm_AHP
         }
 
         /// <summary>
+        /// 计算每个节点对目标层节点的贡献度，对于方案层来说就是方案对目标的贡献度
+        /// </summary>
+        public void CalculateTargetPriorities()
+        {
+            //广度优先遍历辅助队列
+            Queue<BasicNode> travelQueue = new Queue<BasicNode>();
+
+            //目标节点如队列作为遍历的起点
+            travelQueue.Enqueue(this.targetNode);
+            BasicNode iterNode = null;
+            while (travelQueue.Count > 0)
+            {
+                iterNode = travelQueue.Dequeue();
+                iterNode.CalculateTargetPriority();
+                foreach (BasicNode subNode in iterNode.GetDownLinkedNodes())
+                {
+                    if (!travelQueue.Contains(subNode)) travelQueue.Enqueue(subNode);
+                }
+            }
+
+        }
+
+        /// <summary>
         /// 向节点集合添加节点，若同名节点已经存在则不重复添加
         /// </summary>
         /// <param name="item"></param>

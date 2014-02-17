@@ -18,6 +18,7 @@ namespace Algorithm_AHP
         BasicNode[] downLinkedNodes = null; //存储对节点有贡献的下层节点的引用
         List<BasicNode> upLinkedNodes = new List<BasicNode>();  //存储受本节点贡献的上层节点的引用
         Dictionary<string, double> priorities = new Dictionary<string, double>();   //存储计算后的下层节点对本节点的贡献度
+        double priorityToTarget = 0;    //本节点对目标节点的贡献
 
         /// <summary>
         /// 构造函数
@@ -75,6 +76,15 @@ namespace Algorithm_AHP
         public void AddUpLinkedNodes(BasicNode _upLinkedNode)
         {
             this.upLinkedNodes.Add(_upLinkedNode);
+        }
+
+        /// <summary>
+        /// 获取直接上层节点的引用
+        /// </summary>
+        /// <returns></returns>
+        public BasicNode[] GetUpLinkedNodes()
+        {
+            return this.upLinkedNodes.ToArray();
         }
 
         /// <summary>
@@ -140,10 +150,21 @@ namespace Algorithm_AHP
         /// 计算本节点对目标层的总贡献
         /// 对于方案层来说就是计算方案对目标的贡献
         /// </summary>
-        /// <returns></returns>
-        public double CalculateTargetPriority()
+        public void CalculateTargetPriority()
         {
-            return 0;
+            BasicNode[] upNodes = this.GetUpLinkedNodes();
+            double totalPriority = 0;
+            foreach (BasicNode iterNode in upNodes)
+            {
+                double element = iterNode.PriorityToTarget;
+                if (iterNode.GetUpLinkedNodes().Length == 0)
+                {
+                    element = 1;
+                }
+                totalPriority += iterNode.priorities[this.NodeName] * element;
+            }           
+
+            this.priorityToTarget = totalPriority;
         }
 
         /// <summary>
@@ -152,6 +173,16 @@ namespace Algorithm_AHP
         public string NodeName{
             get{
                 return this.nodeName;
+            }
+        }
+
+        /// <summary>
+        /// 本节点对目标节点的贡献
+        /// </summary>
+        public double PriorityToTarget {
+            get 
+            {
+                return this.priorityToTarget;
             }
         }
     }
