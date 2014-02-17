@@ -53,6 +53,19 @@ namespace Algorithm_AHP
         }
 
         /// <summary>
+        /// 获得AHP工程对应的数据文件路径
+        /// </summary>
+        /// <returns></returns>
+        public string GetDataFilePath()
+        {
+            string dataFilePath = this.configFileString.Replace(
+                this.configFileString.Split('\\').Last<string>(), 
+                this.GetConfigItem("DataFileName")
+                );
+            return dataFilePath;
+        }
+
+        /// <summary>
         /// 设置或添加配置项，若配置项不存在则自动添加，否则更改配置项的值
         /// </summary>
         /// <param name="configItemName">配置项名称</param>
@@ -165,6 +178,7 @@ namespace Algorithm_AHP
                 return false;
             }
         }
-    
+
+
     }
 }

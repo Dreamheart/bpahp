@@ -205,8 +205,8 @@ namespace Mixed_BP_AHP
 
         private void ForDev_Open_Click(object sender, EventArgs e)
         {            
-            AHPSolution config = new AHPSolution("test.xml");
-            //config.SetConfigItem("DataFile", "MultiLayerData.xlsx");
+            
+            //config.SetConfigItem("DataFileName", "MultiLayerData.xlsx");
             //config.SetConfigItem("DataColumnBeginIndex", "1");
             //config.SetConfigItem("TotalLayers", "4");
             //config.SetConfigItem("TargetName", "理想度");
@@ -218,17 +218,22 @@ namespace Mixed_BP_AHP
 
             OpenFileDialog openFile = new OpenFileDialog();
 
-            //获得训练数据输入数据文件名
-            openFile.Title = "Select JudgmentMatrix File ...";
-            openFile.Filter = "Excel files (*.xlsx)|*.xlsx|Excel files (*.xls)|*.xls|All files (*.*)|*.*";
+            //获得AHP工程文件路径
+            openFile.Title = "选择AHP工程文件...";
+            openFile.Filter = "AHP工程文件(*.xml)|*.xml|All files (*.*)|*.*";
             DialogResult result = openFile.ShowDialog();
             string file_input = openFile.FileName;
+
+            //读取工程文件获得数据文件路径
+            AHPSolution config = new AHPSolution(file_input);
+            string file_data = config.GetDataFilePath();
+
 
             if (DialogResult.OK == result)
             {
                 ExcelDocument excelFile = new ExcelDocument();
 
-                this.matrixAHP = excelFile.Parse(file_input);
+                this.matrixAHP = excelFile.Parse(file_data);
 
                 AHP_tabControl.TabPages.Clear();
 
