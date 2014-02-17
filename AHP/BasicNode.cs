@@ -13,12 +13,17 @@ namespace Algorithm_AHP
     /// </summary>
     class BasicNode
     {
+        readonly double[] RI = new double[] { 0, 0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49 };    //随即一致性指标
+
         string nodeName = "";   //节点名称
         Fraction[,] matrix = null;  //存储判断矩阵
         BasicNode[] downLinkedNodes = null; //存储对节点有贡献的下层节点的引用
         List<BasicNode> upLinkedNodes = new List<BasicNode>();  //存储受本节点贡献的上层节点的引用
         Dictionary<string, double> priorities = new Dictionary<string, double>();   //存储计算后的下层节点对本节点的贡献度
         double priorityToTarget = 0;    //本节点对目标节点的贡献
+
+        Dictionary<string, double> columnSums = new Dictionary<string, double>();   //辅助计算量，防止计算CR时的重复计算
+
 
         /// <summary>
         /// 构造函数
@@ -88,6 +93,37 @@ namespace Algorithm_AHP
         }
 
         /// <summary>
+        /// 获取本节点判断矩阵的一致性比例
+        /// </summary>
+        /// <returns></returns>
+        public double GetConsistency()
+        {
+            if (this.downLinkedNodes == null)
+            {
+                return 0;
+            }
+
+            int matrixDimension = this.downLinkedNodes.Length;
+            if ( matrixDimension < 3) //若判断矩阵维度为1或2则无需一致性检验
+            {
+                return 0;
+            }
+            else
+            {
+                double ci = 0;
+                string[] keys = this.priorities.Keys.ToArray<string>();
+                foreach (string key in keys)
+                {
+                    ci += this.columnSums[key] * this.priorities[key];
+                }
+
+                ci = (ci - matrixDimension) / (matrixDimension - 1);
+
+                return ci / RI[matrixDimension];
+            }
+        }
+
+        /// <summary>
         /// 计算下层各节点对本节点的贡献度
         /// </summary>
         public void CalculatePriorities() 
@@ -115,8 +151,6 @@ namespace Algorithm_AHP
                 columnSum[i] = sum;
             }
 
-            //this.columnSums[nodeIndex] = columnSum;
-
             //Step 2
             for (int i = 0; i < indexCount; i++)
             {
@@ -137,11 +171,12 @@ namespace Algorithm_AHP
                 pv[i] = averagePV / indexCount;
             }
             
-            //存储贡献度
+            //存储贡献度            
             string[] keys = this.priorities.Keys.ToArray<string>();
             int pvindex = 0;
             foreach (string key in keys)
             {
+                this.columnSums[key] = columnSum[pvindex];  //存储辅助计算量，防止计算CR时的重复计算
                 this.priorities[key] = pv[pvindex++];
             }
         }
@@ -152,6 +187,8 @@ namespace Algorithm_AHP
         /// </summary>
         public void CalculateTargetPriority()
         {
+            Console.WriteLine(string.Format("节点【{0}】的一致性比例CR={1}",this.nodeName,this.GetConsistency()));
+
             BasicNode[] upNodes = this.GetUpLinkedNodes();
             double totalPriority = 0;
             foreach (BasicNode iterNode in upNodes)
