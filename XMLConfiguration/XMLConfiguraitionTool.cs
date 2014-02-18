@@ -37,6 +37,7 @@ namespace XMLConfiguration
             {
                 stream = new System.IO.FileStream(configFileString, System.IO.FileMode.Open);
                 xmlConfig.Load(stream);
+                stream.Close();
             }
             catch (Exception)
             {
