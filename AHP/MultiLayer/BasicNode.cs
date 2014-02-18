@@ -124,6 +124,45 @@ namespace Algorithm_AHP
         }
 
         /// <summary>
+        /// 根据原始矩阵，获取完全一致性矩阵
+        /// </summary>
+        /// <param name="originMatrix">原始矩阵</param>
+        /// <returns>完全一致性矩阵</returns>
+        private Fraction[,] GetCompletelyConsistencyMatrix(Fraction[,] originMatrix)
+        {
+            if (originMatrix == null)
+            {
+                return null;
+            }
+
+            int dimension = originMatrix.GetLength(0);
+            Fraction[,] result = new Fraction[dimension, dimension];
+
+            double[] sum_A_nl = new double[dimension];
+
+            for (int i = 0; i < dimension; i++)
+            {
+                sum_A_nl[i] = 0;
+                for (int j = 0; j < dimension; j++)
+                {
+                    sum_A_nl[i] += originMatrix[i, j].DoubleValue;
+                }
+
+            }
+
+
+            for (int i = 0; i < dimension; i++)
+            {
+                for (int j = 0; j < dimension; j++)
+                {
+                    result[i, j] = new Fraction(sum_A_nl[i] / sum_A_nl[j]);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// 计算下层各节点对本节点的贡献度
         /// </summary>
         public void CalculatePriorities() 
@@ -185,9 +224,17 @@ namespace Algorithm_AHP
         /// 计算本节点对目标层的总贡献
         /// 对于方案层来说就是计算方案对目标的贡献
         /// </summary>
-        public void CalculateTargetPriority()
+        public void CalculateTargetPriority(double CRLimit)
         {
-            Console.WriteLine(string.Format("节点【{0}】的一致性比例CR={1}",this.nodeName,this.GetConsistency()));
+            #region 一致性调整
+            if (this.GetConsistency()>CRLimit)
+            {
+                //Console.WriteLine(string.Format("调整前：节点【{0}】的一致性比例CR={1}", this.nodeName, this.GetConsistency()));
+                this.matrix = GetCompletelyConsistencyMatrix(this.matrix);
+                this.CalculatePriorities();
+                //Console.WriteLine(string.Format("调整后：节点【{0}】的一致性比例CR={1}", this.nodeName, this.GetConsistency())); 
+            }
+            #endregion
 
             BasicNode[] upNodes = this.GetUpLinkedNodes();
             double totalPriority = 0;

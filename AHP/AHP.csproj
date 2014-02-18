@@ -39,15 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AHP.cs" />
-    <Compile Include="AHPSolution.cs" />
-    <Compile Include="BasicNode.cs" />
-    <Compile Include="BPAHP.cs" />
-    <Compile Include="AbstractAHP.cs" />
-    <Compile Include="Fraction.cs" />
-    <Compile Include="LayerDescription.cs" />
-    <Compile Include="AHPExceptions.cs" />
-    <Compile Include="MultiLayersAHP.cs" />
+    <Compile Include="3Layer\AHP.cs" />
+    <Compile Include="MultiLayer\AHPSolution.cs" />
+    <Compile Include="MultiLayer\BasicNode.cs" />
+    <Compile Include="3Layer\BPAHP.cs" />
+    <Compile Include="3Layer\AbstractAHP.cs" />
+    <Compile Include="components\Fraction.cs" />
+    <Compile Include="3Layer\LayerDescription.cs" />
+    <Compile Include="components\AHPExceptions.cs" />
+    <Compile Include="MultiLayer\MultiLayersAHP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -130,7 +130,7 @@ namespace Algorithm_AHP
             while (travelQueue.Count > 0)
             {
                 iterNode = travelQueue.Dequeue();
-                iterNode.CalculateTargetPriority();
+                iterNode.CalculateTargetPriority( double.Parse(this.config.GetConfigItem("CRLimit")) );
                 foreach (BasicNode subNode in iterNode.GetDownLinkedNodes())
                 {
                     if (!travelQueue.Contains(subNode)) travelQueue.Enqueue(subNode);
@@ -170,6 +170,14 @@ namespace Algorithm_AHP
                 }
             }
             return matrix;
+        }
+
+        public void TestMethod()
+        {
+            foreach (BasicNode plan in this.planNodes)
+            {
+                Console.WriteLine(string.Format("方案【{0}】的【{1}】为【{2}】",plan.NodeName,this.targetNode.NodeName,plan.PriorityToTarget));  
+            }
         }
 
     }

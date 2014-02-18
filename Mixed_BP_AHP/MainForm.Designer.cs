@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.BPAHP_tabControl = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -42,6 +42,8 @@
             this.BP_AHP_Test = new System.Windows.Forms.ToolStripMenuItem();
             this.Option_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Help_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.forDevToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ForDev_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -57,8 +59,6 @@
             this.ResultView_Page = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.ahP_Design_Guide1 = new Mixed_BP_AHP.AHP_Design_Guide();
-            this.forDevToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ForDev_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.BPAHP_tabControl.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -170,6 +170,21 @@
             this.Help_ToolStripMenuItem.Name = "Help_ToolStripMenuItem";
             this.Help_ToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
             this.Help_ToolStripMenuItem.Text = "帮助(&H)";
+            // 
+            // forDevToolStripMenuItem
+            // 
+            this.forDevToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ForDev_Open});
+            this.forDevToolStripMenuItem.Name = "forDevToolStripMenuItem";
+            this.forDevToolStripMenuItem.Size = new System.Drawing.Size(80, 24);
+            this.forDevToolStripMenuItem.Text = "For_Dev";
+            // 
+            // ForDev_Open
+            // 
+            this.ForDev_Open.Name = "ForDev_Open";
+            this.ForDev_Open.Size = new System.Drawing.Size(118, 24);
+            this.ForDev_Open.Text = "Open";
+            this.ForDev_Open.Click += new System.EventHandler(this.ForDev_Open_Click);
             // 
             // toolStrip1
             // 
@@ -328,11 +343,11 @@
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(4, 4);
             this.chart1.Margin = new System.Windows.Forms.Padding(4);
             this.chart1.Name = "chart1";
@@ -347,21 +362,6 @@
             this.ahP_Design_Guide1.Name = "ahP_Design_Guide1";
             this.ahP_Design_Guide1.Size = new System.Drawing.Size(1201, 641);
             this.ahP_Design_Guide1.TabIndex = 0;
-            // 
-            // forDevToolStripMenuItem
-            // 
-            this.forDevToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ForDev_Open});
-            this.forDevToolStripMenuItem.Name = "forDevToolStripMenuItem";
-            this.forDevToolStripMenuItem.Size = new System.Drawing.Size(80, 24);
-            this.forDevToolStripMenuItem.Text = "For_Dev";
-            // 
-            // ForDev_Open
-            // 
-            this.ForDev_Open.Name = "ForDev_Open";
-            this.ForDev_Open.Size = new System.Drawing.Size(152, 24);
-            this.ForDev_Open.Text = "Open";
-            this.ForDev_Open.Click += new System.EventHandler(this.ForDev_Open_Click);
             // 
             // MainForm
             // 
