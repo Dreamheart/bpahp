@@ -28,8 +28,8 @@ namespace Algorithm_AHP
         {
             this.config = config;
             this.matrixs = matrixs;
-            this.layerCount = int.Parse(config.GetConfigItem("TotalLayers", "4"));
-            this.DataColumnBeginIndex = int.Parse(config.GetConfigItem("DataColumnBeginIndex", "1"));
+            this.layerCount = config.GetTotalLayers();
+            this.DataColumnBeginIndex = config.GetBeginColumn();
             this.Create();
         }
 
@@ -130,7 +130,7 @@ namespace Algorithm_AHP
             while (travelQueue.Count > 0)
             {
                 iterNode = travelQueue.Dequeue();
-                iterNode.CalculateTargetPriority( double.Parse(this.config.GetConfigItem("CRLimit")) );
+                iterNode.CalculateTargetPriority( config.GetCRLimit() );
                 foreach (BasicNode subNode in iterNode.GetDownLinkedNodes())
                 {
                     if (!travelQueue.Contains(subNode)) travelQueue.Enqueue(subNode);

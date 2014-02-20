@@ -227,16 +227,7 @@ namespace Mixed_BP_AHP
 
             //读取工程文件获得数据文件路径
             AHPSolution config = new AHPSolution(file_input);
-            config.SetConfigItem("DataFileName", "MultiLayerData.xlsx");
-            config.SetConfigItem("DataColumnBeginIndex", "1");
-            config.SetConfigItem("CRLimit", "0.01");
-            config.SetConfigItem("TotalLayers", "4");
-            config.SetConfigItem("TargetName", "理想度");
-            config.SetConfigItem("PlanNames", "计划1;计划2;计划3;计划4");
-            config.SetConfigItem("理想度", "准则1A;准则1B;准则1C");
-            config.SetConfigItem("准则1A", "准则2A;准则2B");
-            config.SetConfigItem("准则1B", "准则2B;准则2C;准则2D");
-            config.SetConfigItem("准则1C", "准则2A;准则2B;准则2D");
+            DisplaySolutionInfo(file_input, config);    //显示Solution信息到界面上
             string file_data = config.GetDataFilePath();
 
 
@@ -264,13 +255,26 @@ namespace Mixed_BP_AHP
 
                     AHP_tabControl.TabPages.Add(page);
                 }
+
+                MultiLayersAHP mahp = new MultiLayersAHP(config, this.matrixAHP);
+                mahp.CalculatePriorities();
+                mahp.CalculateTargetPriorities();
+
+                mahp.TestMethod();
             }
 
-            MultiLayersAHP mahp = new MultiLayersAHP(config, this.matrixAHP);
-            mahp.CalculatePriorities();
-            mahp.CalculateTargetPriorities();
+            
+        }
 
-            mahp.TestMethod();
+        private void DisplaySolutionInfo(string SolutionFile, AHPSolution config)
+        {
+            SolutionInfo_SolutionName.Text = SolutionFile;
+            SolutionInfo_DataFilePath.Text = config.GetDataFilePath();
+            SolutionInfo_BeginColumn.Text = config.GetBeginColumn().ToString();
+            SolutionInfo_TotalLayers.Text = config.GetTotalLayers().ToString();
+            SolutionInfo_CRLimit.Text = config.GetCRLimit().ToString();
+            SolutionInfo_TargetName.Text = config.GetTargetName();
+            SolutionInfo_PlanNames.Text = config.GetPlanNames();
         }
 
     }       

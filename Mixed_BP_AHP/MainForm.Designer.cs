@@ -58,6 +58,22 @@
             this.DataView_Page = new System.Windows.Forms.TabPage();
             this.ResultView_Page = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.SolutionInfo_SolutionName = new System.Windows.Forms.TextBox();
+            this.SolutionInfo_DataFilePath = new System.Windows.Forms.TextBox();
+            this.SolutionInfo_BeginColumn = new System.Windows.Forms.TextBox();
+            this.SolutionInfo_TotalLayers = new System.Windows.Forms.TextBox();
+            this.SolutionInfo_CRLimit = new System.Windows.Forms.TextBox();
+            this.SolutionInfo_TargetName = new System.Windows.Forms.TextBox();
+            this.SolutionInfo_PlanNames = new System.Windows.Forms.TextBox();
             this.ahP_Design_Guide1 = new Mixed_BP_AHP.AHP_Design_Guide();
             this.BPAHP_tabControl.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -73,6 +89,8 @@
             this.DataView_Page.SuspendLayout();
             this.ResultView_Page.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // BPAHP_tabControl
@@ -83,7 +101,7 @@
             this.BPAHP_tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.BPAHP_tabControl.Name = "BPAHP_tabControl";
             this.BPAHP_tabControl.SelectedIndex = 0;
-            this.BPAHP_tabControl.Size = new System.Drawing.Size(573, 613);
+            this.BPAHP_tabControl.Size = new System.Drawing.Size(457, 613);
             this.BPAHP_tabControl.TabIndex = 5;
             // 
             // tabPage2
@@ -92,7 +110,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(565, 584);
+            this.tabPage2.Size = new System.Drawing.Size(449, 584);
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "BP调整的判断矩阵";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -234,7 +252,7 @@
             this.AHP_tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.AHP_tabControl.Name = "AHP_tabControl";
             this.AHP_tabControl.SelectedIndex = 0;
-            this.AHP_tabControl.Size = new System.Drawing.Size(597, 613);
+            this.AHP_tabControl.Size = new System.Drawing.Size(478, 613);
             this.AHP_tabControl.TabIndex = 9;
             // 
             // tabPage1
@@ -243,7 +261,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(589, 584);
+            this.tabPage1.Size = new System.Drawing.Size(470, 584);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "原始判断矩阵";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -262,8 +280,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
-            this.splitContainer1.Size = new System.Drawing.Size(1199, 639);
-            this.splitContainer1.SplitterDistance = 605;
+            this.splitContainer1.Size = new System.Drawing.Size(964, 639);
+            this.splitContainer1.SplitterDistance = 486;
             this.splitContainer1.SplitterWidth = 13;
             this.splitContainer1.TabIndex = 10;
             // 
@@ -275,7 +293,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(605, 639);
+            this.groupBox2.Size = new System.Drawing.Size(486, 639);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "原始AHP判断矩阵";
@@ -288,7 +306,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(581, 639);
+            this.groupBox3.Size = new System.Drawing.Size(465, 639);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "经BP调整一致性的判断矩阵";
@@ -299,11 +317,11 @@
             this.View_tabControl.Controls.Add(this.DataView_Page);
             this.View_tabControl.Controls.Add(this.ResultView_Page);
             this.View_tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.View_tabControl.Location = new System.Drawing.Point(0, 28);
+            this.View_tabControl.Location = new System.Drawing.Point(235, 28);
             this.View_tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.View_tabControl.Name = "View_tabControl";
             this.View_tabControl.SelectedIndex = 0;
-            this.View_tabControl.Size = new System.Drawing.Size(1215, 676);
+            this.View_tabControl.Size = new System.Drawing.Size(980, 676);
             this.View_tabControl.TabIndex = 11;
             // 
             // Design_Page
@@ -312,7 +330,7 @@
             this.Design_Page.Location = new System.Drawing.Point(4, 25);
             this.Design_Page.Name = "Design_Page";
             this.Design_Page.Padding = new System.Windows.Forms.Padding(3);
-            this.Design_Page.Size = new System.Drawing.Size(1207, 647);
+            this.Design_Page.Size = new System.Drawing.Size(972, 647);
             this.Design_Page.TabIndex = 2;
             this.Design_Page.Text = "设计视图";
             this.Design_Page.UseVisualStyleBackColor = true;
@@ -324,7 +342,7 @@
             this.DataView_Page.Margin = new System.Windows.Forms.Padding(4);
             this.DataView_Page.Name = "DataView_Page";
             this.DataView_Page.Padding = new System.Windows.Forms.Padding(4);
-            this.DataView_Page.Size = new System.Drawing.Size(1207, 647);
+            this.DataView_Page.Size = new System.Drawing.Size(972, 647);
             this.DataView_Page.TabIndex = 0;
             this.DataView_Page.Text = "数据视图";
             this.DataView_Page.UseVisualStyleBackColor = true;
@@ -336,7 +354,7 @@
             this.ResultView_Page.Margin = new System.Windows.Forms.Padding(4);
             this.ResultView_Page.Name = "ResultView_Page";
             this.ResultView_Page.Padding = new System.Windows.Forms.Padding(4);
-            this.ResultView_Page.Size = new System.Drawing.Size(1207, 647);
+            this.ResultView_Page.Size = new System.Drawing.Size(972, 647);
             this.ResultView_Page.TabIndex = 1;
             this.ResultView_Page.Text = "结果视图";
             this.ResultView_Page.UseVisualStyleBackColor = true;
@@ -351,16 +369,169 @@
             this.chart1.Location = new System.Drawing.Point(4, 4);
             this.chart1.Margin = new System.Windows.Forms.Padding(4);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(1199, 639);
+            this.chart1.Size = new System.Drawing.Size(964, 639);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 28);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(5);
+            this.panel1.Size = new System.Drawing.Size(235, 676);
+            this.panel1.TabIndex = 12;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.SolutionInfo_PlanNames);
+            this.groupBox1.Controls.Add(this.SolutionInfo_TargetName);
+            this.groupBox1.Controls.Add(this.SolutionInfo_CRLimit);
+            this.groupBox1.Controls.Add(this.SolutionInfo_TotalLayers);
+            this.groupBox1.Controls.Add(this.SolutionInfo_BeginColumn);
+            this.groupBox1.Controls.Add(this.SolutionInfo_DataFilePath);
+            this.groupBox1.Controls.Add(this.SolutionInfo_SolutionName);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(5, 5);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(225, 666);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "描述信息";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "工程文件";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 58);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 15);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "数据文件";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 89);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "标识数量";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 120);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(61, 15);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "AHP层次";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 151);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 15);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "CR阈值";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 182);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 15);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "目标名称";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 213);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(67, 15);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "方案名称";
+            // 
+            // SolutionInfo_SolutionName
+            // 
+            this.SolutionInfo_SolutionName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SolutionInfo_SolutionName.Location = new System.Drawing.Point(82, 22);
+            this.SolutionInfo_SolutionName.Name = "SolutionInfo_SolutionName";
+            this.SolutionInfo_SolutionName.Size = new System.Drawing.Size(136, 25);
+            this.SolutionInfo_SolutionName.TabIndex = 7;
+            // 
+            // SolutionInfo_DataFilePath
+            // 
+            this.SolutionInfo_DataFilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SolutionInfo_DataFilePath.Location = new System.Drawing.Point(82, 53);
+            this.SolutionInfo_DataFilePath.Name = "SolutionInfo_DataFilePath";
+            this.SolutionInfo_DataFilePath.Size = new System.Drawing.Size(136, 25);
+            this.SolutionInfo_DataFilePath.TabIndex = 7;
+            // 
+            // SolutionInfo_BeginColumn
+            // 
+            this.SolutionInfo_BeginColumn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SolutionInfo_BeginColumn.Location = new System.Drawing.Point(82, 84);
+            this.SolutionInfo_BeginColumn.Name = "SolutionInfo_BeginColumn";
+            this.SolutionInfo_BeginColumn.Size = new System.Drawing.Size(136, 25);
+            this.SolutionInfo_BeginColumn.TabIndex = 7;
+            // 
+            // SolutionInfo_TotalLayers
+            // 
+            this.SolutionInfo_TotalLayers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SolutionInfo_TotalLayers.Location = new System.Drawing.Point(82, 115);
+            this.SolutionInfo_TotalLayers.Name = "SolutionInfo_TotalLayers";
+            this.SolutionInfo_TotalLayers.Size = new System.Drawing.Size(136, 25);
+            this.SolutionInfo_TotalLayers.TabIndex = 7;
+            // 
+            // SolutionInfo_CRLimit
+            // 
+            this.SolutionInfo_CRLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SolutionInfo_CRLimit.Location = new System.Drawing.Point(82, 146);
+            this.SolutionInfo_CRLimit.Name = "SolutionInfo_CRLimit";
+            this.SolutionInfo_CRLimit.Size = new System.Drawing.Size(136, 25);
+            this.SolutionInfo_CRLimit.TabIndex = 7;
+            // 
+            // SolutionInfo_TargetName
+            // 
+            this.SolutionInfo_TargetName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SolutionInfo_TargetName.Location = new System.Drawing.Point(82, 177);
+            this.SolutionInfo_TargetName.Name = "SolutionInfo_TargetName";
+            this.SolutionInfo_TargetName.Size = new System.Drawing.Size(136, 25);
+            this.SolutionInfo_TargetName.TabIndex = 7;
+            // 
+            // SolutionInfo_PlanNames
+            // 
+            this.SolutionInfo_PlanNames.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SolutionInfo_PlanNames.Location = new System.Drawing.Point(82, 208);
+            this.SolutionInfo_PlanNames.Name = "SolutionInfo_PlanNames";
+            this.SolutionInfo_PlanNames.Size = new System.Drawing.Size(136, 25);
+            this.SolutionInfo_PlanNames.TabIndex = 7;
             // 
             // ahP_Design_Guide1
             // 
             this.ahP_Design_Guide1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ahP_Design_Guide1.Location = new System.Drawing.Point(3, 3);
             this.ahP_Design_Guide1.Name = "ahP_Design_Guide1";
-            this.ahP_Design_Guide1.Size = new System.Drawing.Size(1201, 641);
+            this.ahP_Design_Guide1.Size = new System.Drawing.Size(966, 641);
             this.ahP_Design_Guide1.TabIndex = 0;
             // 
             // MainForm
@@ -369,6 +540,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1215, 704);
             this.Controls.Add(this.View_tabControl);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -392,6 +564,9 @@
             this.DataView_Page.ResumeLayout(false);
             this.ResultView_Page.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -427,6 +602,22 @@
         private System.Windows.Forms.ToolStripMenuItem Option_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem forDevToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ForDev_Open;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox SolutionInfo_PlanNames;
+        private System.Windows.Forms.TextBox SolutionInfo_TargetName;
+        private System.Windows.Forms.TextBox SolutionInfo_CRLimit;
+        private System.Windows.Forms.TextBox SolutionInfo_TotalLayers;
+        private System.Windows.Forms.TextBox SolutionInfo_BeginColumn;
+        private System.Windows.Forms.TextBox SolutionInfo_DataFilePath;
+        private System.Windows.Forms.TextBox SolutionInfo_SolutionName;
     }
 }
 

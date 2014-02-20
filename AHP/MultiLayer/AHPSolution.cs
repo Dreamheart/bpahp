@@ -181,5 +181,30 @@ namespace Algorithm_AHP
         }
 
 
+
+        public int GetBeginColumn()
+        {
+            return int.Parse(GetConfigItem("DataColumnBeginIndex", "1"));
+        }
+
+        public int GetTotalLayers()
+        {
+            return int.Parse(GetConfigItem("TotalLayers"));
+        }
+
+        public double GetCRLimit()
+        {
+            return double.Parse(GetConfigItem("CRLimit"));
+        }
+
+        public string GetTargetName()
+        {
+            return GetConfigItem("TargetName");
+        }
+
+        public string GetPlanNames()
+        {
+            return GetConfigItem("PlanNames");
+        }
     }
 }
