@@ -183,7 +183,7 @@ namespace Algorithm_AHP
             {
                 study++;
                 bpn.train();
-            } while (bpn.e > 0.001 && study < 50000);
+            } while (bpn.e > 0.001 && study < 5000);
 
             Console.WriteLine("经过 " + study + "次学习： 均方差为 " + bpn.e);
 

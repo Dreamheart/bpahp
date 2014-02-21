@@ -23,7 +23,6 @@ namespace Algorithm_AHP
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="layerCount">AHP层数，包含目标层、准则层、方案层</param>
         public MultiLayersAHP(AHPSolution config,DataSet matrixs)
         {
             this.config = config;
@@ -31,6 +30,16 @@ namespace Algorithm_AHP
             this.layerCount = config.GetTotalLayers();
             this.DataColumnBeginIndex = config.GetBeginColumn();
             this.Create();
+        }
+
+        /// <summary>
+        /// 生成BasicNode或其子类型的对象
+        /// </summary>
+        /// <param name="nodeName"></param>
+        /// <returns></returns>
+        protected virtual BasicNode NewNode(string nodeName)
+        {
+            return new BasicNode(nodeName);
         }
 
         /// <summary>
@@ -148,7 +157,7 @@ namespace Algorithm_AHP
         {
             if ( ! this.Nodes.ContainsKey(item))
             {
-                this.Nodes.Add(item, new BasicNode(item)); 
+                this.Nodes.Add(item, NewNode(item)); 
             }
             return this.Nodes[item];
         }
@@ -172,12 +181,20 @@ namespace Algorithm_AHP
             return matrix;
         }
 
-        public void TestMethod()
+
+        /// <summary>
+        /// 获取经过CalculateTargetPriorities()计算的方案总结果
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string,double> GetTargetPriorities()
         {
+            Dictionary<string, double> result = new Dictionary<string, double>();
             foreach (BasicNode plan in this.planNodes)
             {
+                result[plan.NodeName] = plan.PriorityToTarget;
                 Console.WriteLine(string.Format("方案【{0}】的【{1}】为【{2}】",plan.NodeName,this.targetNode.NodeName,plan.PriorityToTarget));  
             }
+            return result;
         }
 
     }

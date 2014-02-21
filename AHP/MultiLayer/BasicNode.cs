@@ -11,12 +11,12 @@ namespace Algorithm_AHP
     /// 准则层：节点既有向上关联节点，又有向下关联节点
     /// 方案层：节点只有向上关联节点
     /// </summary>
-    class BasicNode
+    public class BasicNode
     {
         readonly double[] RI = new double[] { 0, 0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49 };    //随即一致性指标
 
         string nodeName = "";   //节点名称
-        Fraction[,] matrix = null;  //存储判断矩阵
+        protected Fraction[,] matrix = null;  //存储判断矩阵
         BasicNode[] downLinkedNodes = null; //存储对节点有贡献的下层节点的引用
         List<BasicNode> upLinkedNodes = new List<BasicNode>();  //存储受本节点贡献的上层节点的引用
         Dictionary<string, double> priorities = new Dictionary<string, double>();   //存储计算后的下层节点对本节点的贡献度
@@ -226,15 +226,7 @@ namespace Algorithm_AHP
         /// </summary>
         public void CalculateTargetPriority(double CRLimit)
         {
-            #region 一致性调整
-            if (this.GetConsistency()>CRLimit)
-            {
-                //Console.WriteLine(string.Format("调整前：节点【{0}】的一致性比例CR={1}", this.nodeName, this.GetConsistency()));
-                this.matrix = GetCompletelyConsistencyMatrix(this.matrix);
-                this.CalculatePriorities();
-                //Console.WriteLine(string.Format("调整后：节点【{0}】的一致性比例CR={1}", this.nodeName, this.GetConsistency())); 
-            }
-            #endregion
+            AdjustConsistency(CRLimit);            
 
             BasicNode[] upNodes = this.GetUpLinkedNodes();
             double totalPriority = 0;
@@ -249,6 +241,21 @@ namespace Algorithm_AHP
             }           
 
             this.priorityToTarget = totalPriority;
+        }
+
+        /// <summary>
+        /// 一致性调整方法
+        /// </summary>
+        /// <param name="CRLimit"></param>
+        protected virtual void AdjustConsistency(double CRLimit)
+        {
+            if (this.GetConsistency() > CRLimit)
+            {
+                //Console.WriteLine(string.Format("调整前：节点【{0}】的一致性比例CR={1}", this.nodeName, this.GetConsistency()));
+                this.matrix = GetCompletelyConsistencyMatrix(this.matrix);
+                this.CalculatePriorities();
+                //Console.WriteLine(string.Format("调整后：节点【{0}】的一致性比例CR={1}", this.nodeName, this.GetConsistency())); 
+            }
         }
 
         /// <summary>

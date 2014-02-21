@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{80EF260C-2731-4C66-95FB-6C22B98A793F}</ProjectGuid>
+    <ProjectGuid>{1CD86F83-30CC-40B1-80DA-FFE99023FD71}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Algorithm_AHP</RootNamespace>
-    <AssemblyName>AHP</AssemblyName>
+    <RootNamespace>BPAHP</RootNamespace>
+    <AssemblyName>BPAHP</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,23 +32,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="3Layer\AHP.cs" />
-    <Compile Include="MultiLayer\AHPSolution.cs" />
-    <Compile Include="MultiLayer\BasicNode.cs" />
-    <Compile Include="components\Fraction.cs" />
-    <Compile Include="3Layer\LayerDescription.cs" />
-    <Compile Include="components\AHPExceptions.cs" />
-    <Compile Include="MultiLayer\MultiLayersAHP.cs" />
+    <Compile Include="BPAdjustedAHP.cs" />
+    <Compile Include="BPAdjustedNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AHP\AHP.csproj">
+      <Project>{80EF260C-2731-4C66-95FB-6C22B98A793F}</Project>
+      <Name>AHP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BPNet\BPNet.csproj">
       <Project>{82428F82-C9F0-49F9-AEB3-A070CB1BB5B7}</Project>
       <Name>BPNet</Name>

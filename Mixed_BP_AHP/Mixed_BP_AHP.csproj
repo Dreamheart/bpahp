@@ -145,6 +145,10 @@
       <Project>{80EF260C-2731-4C66-95FB-6C22B98A793F}</Project>
       <Name>AHP</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BPAHP\BPAHP.csproj">
+      <Project>{1CD86F83-30CC-40B1-80DA-FFE99023FD71}</Project>
+      <Name>BPAHP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BPNet\BPNet.csproj">
       <Project>{82428F82-C9F0-49F9-AEB3-A070CB1BB5B7}</Project>
       <Name>BPNet</Name>

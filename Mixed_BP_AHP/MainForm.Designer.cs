@@ -202,7 +202,6 @@
             this.ForDev_Open.Name = "ForDev_Open";
             this.ForDev_Open.Size = new System.Drawing.Size(118, 24);
             this.ForDev_Open.Text = "Open";
-            this.ForDev_Open.Click += new System.EventHandler(this.ForDev_Open_Click);
             // 
             // toolStrip1
             // 
