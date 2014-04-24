@@ -160,7 +160,7 @@ namespace Mixed_BP_AHP
             curSeries.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             foreach (string key in pointCollection.Keys)
             {
-                curSeries.Points.AddXY(key, pointCollection[key]);
+                curSeries.Points.AddXY(key, Math.Round(pointCollection[key],3));
             }
         }
 
@@ -188,6 +188,26 @@ namespace Mixed_BP_AHP
             SolutionInfo_CRLimit.Text = config.GetCRLimit().ToString();
             SolutionInfo_TargetName.Text = config.GetTargetName();
             SolutionInfo_PlanNames.Text = config.GetPlanNames();
+        }
+
+        private void QT_Open_Click(object sender, EventArgs e)
+        {
+            this.Menu_OpenJudgmentFile_Click(sender, e);
+        }
+
+        private void QT_AHP_Click(object sender, EventArgs e)
+        {
+            this.AHP_test_Click(sender, e);
+        }
+
+        private void QT_BPAHP_Click(object sender, EventArgs e)
+        {
+            this.BP_AHP_Test_Click(sender, e);
+        }
+
+        private void QT_Setup_Click(object sender, EventArgs e)
+        {
+            this.Option_ToolStripMenuItem_Click(sender, e);
         }
 
     }       
