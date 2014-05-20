@@ -197,5 +197,36 @@ namespace Algorithm_AHP
             return result;
         }
 
+        //获取调整后的数据集
+        public DataSet GetAdjustedDataSet()
+        {
+            DataSet result = new DataSet();
+            //广度优先遍历辅助队列
+            Queue<BasicNode> travelQueue = new Queue<BasicNode>();
+
+            //目标节点如队列作为遍历的起点
+            travelQueue.Enqueue(this.targetNode);
+            BasicNode iterNode = null;
+            while (travelQueue.Count > 0)
+            {
+                //获取
+                iterNode = travelQueue.Dequeue();
+
+                //处理           
+                if (iterNode.GetDownLinkedNodes().Count() > 0 )
+                {
+                    result.Tables.Add(iterNode.GetDataTable());
+                }
+                
+
+                //收尾
+                foreach (BasicNode subNode in iterNode.GetDownLinkedNodes())
+                {
+                    if (!travelQueue.Contains(subNode)) travelQueue.Enqueue(subNode);
+                }
+            }
+            return result;
+        }
+
     }
 }

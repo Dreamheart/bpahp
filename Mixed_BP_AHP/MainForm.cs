@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Windows.Forms.DataVisualization.Charting;
 using XMLConfiguration;
 using BPAHP;
+using System.Diagnostics;
 
 namespace Mixed_BP_AHP
 {
@@ -23,7 +24,7 @@ namespace Mixed_BP_AHP
         private MultiLayersAHP mahp = null;
         private BPAdjustedAHP bpahp = null;
         private DataSet matrixAHP = null;
-        //private DataSet matrixBPAHP = null;
+        private DataSet matrixBPAHP = null;
 
         public MainForm()
         {
@@ -33,6 +34,7 @@ namespace Mixed_BP_AHP
         private void Menu_OpenJudgmentFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
+            openFile.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             //获得AHP工程文件路径
             openFile.Title = "选择AHP工程文件...";
@@ -68,6 +70,10 @@ namespace Mixed_BP_AHP
 
                     AHP_tabControl.TabPages.Add(page);
                 }
+
+                View_tabControl.SelectedTab = Design_Page;
+
+                chart1.Series.Clear();
              
             }
 
@@ -91,37 +97,6 @@ namespace Mixed_BP_AHP
             }
         }
 
-        //private void BP_AHP_Decision()
-        //{
-        //    Dictionary<string,double> dict = SetJudgmentMatrixFromDataSet(ahp.GetAdjustedMatrix());
-
-        //    this.AddNewSeriesToChart(chart1,"BP-AHP决策",dict);
-        //    View_tabControl.SelectedTab = ResultView_Page;
-        //}
-
-        //private void AdjustConsistencyAndDisplay()
-        //{
-        //    BPAHP_tabControl.TabPages.Clear();
-
-        //    DataSet bpMatrix = bpahp.GetAdjustedMatrix();
-        //    int i = 0;
-
-        //    foreach (TabPage page in AHP_tabControl.TabPages)
-        //    {
-        //        TabPage newpage = new TabPage(page.Text);
-
-        //        DataGridView dgv = new DataGridView();
-        //        dgv.ReadOnly = true;
-        //        dgv.DataSource = bpMatrix.Tables[i++];
-
-        //        newpage.Controls.Add(dgv);
-
-        //        dgv.Dock = DockStyle.Fill;
-
-        //        BPAHP_tabControl.TabPages.Add(newpage);
-        //    }
-        //}
-
         private void BP_AHP_Test_Click(object sender, EventArgs e)
         {
             try
@@ -133,6 +108,30 @@ namespace Mixed_BP_AHP
                 Dictionary<string, double> dict = bpahp.GetTargetPriorities();
                 this.AddNewSeriesToChart(chart1, "BP-AHP决策", dict);
                 View_tabControl.SelectedTab = ResultView_Page;
+
+                //取回调整好的矩阵
+                DataSet matrixBPAHP = this.bpahp.GetAdjustedDataSet();
+                BPAHP_tabControl.TabPages.Clear();
+
+                foreach (DataTable table in matrixBPAHP.Tables)
+                {
+                    TabPage page = new TabPage(table.TableName.TrimEnd('$'));
+
+                    DataGridView dgv = new DataGridView();
+                    dgv.EditMode = DataGridViewEditMode.EditProgrammatically;
+                    dgv.ReadOnly = true;
+
+                    dgv.DataSource = table;
+
+                    page.Controls.Add(dgv);
+
+                    dgv.Dock = DockStyle.Fill;
+
+                    BPAHP_tabControl.TabPages.Add(page);
+                }
+
+
+
             }
             catch (NullJudgmentMatrixException ex)
             {
@@ -208,6 +207,28 @@ namespace Mixed_BP_AHP
         private void QT_Setup_Click(object sender, EventArgs e)
         {
             this.Option_ToolStripMenuItem_Click(sender, e);
+        }
+
+        private void Menu_Output_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog openFile = new SaveFileDialog();
+
+            //获得输出保存地址
+            openFile.Title = "选择结果输出位置";
+            openFile.Filter = "JPEG文件(*.jpg)|*.jpg|All files (*.*)|*.*";
+            DialogResult result = openFile.ShowDialog();
+
+            if (DialogResult.OK == result)
+            {
+
+                chart1.SaveImage(openFile.FileName, ChartImageFormat.Jpeg);
+            }
+        }
+
+        private void Help_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filepath = AppDomain.CurrentDomain.BaseDirectory+ @"help.chm";
+            Process.Start(filepath);
         }
 
     }       

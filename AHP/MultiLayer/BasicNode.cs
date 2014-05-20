@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace Algorithm_AHP
 {
@@ -275,6 +276,34 @@ namespace Algorithm_AHP
             {
                 return this.priorityToTarget;
             }
+        }
+
+        public DataTable GetDataTable()
+        {
+            DataTable result = new DataTable();
+
+            //添加列，设置表名
+            result.TableName = this.nodeName;
+            result.Columns.Add(" ", "".GetType());
+            foreach (BasicNode subNode in this.downLinkedNodes)
+            {
+                result.Columns.Add(subNode.nodeName, "".GetType());
+            }
+
+            //添加数据
+            DataRow row = null;
+            for (int i = 0; i < this.matrix.GetLength(1); i++)
+            {                
+                row = result.NewRow();
+                row[0] = this.downLinkedNodes[i].nodeName;
+                for (int j = 0; j < this.matrix.GetLength(0); j++)
+                {                    
+                    row[j + 1] = this.matrix[i, j].GetDisplayValue();
+                }
+                result.Rows.Add(row);
+            }
+
+            return result;
         }
     }
 }
